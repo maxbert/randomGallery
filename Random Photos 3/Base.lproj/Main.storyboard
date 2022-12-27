@@ -85,13 +85,13 @@
         <!--Image View-->
         <scene sceneID="EKp-H8-knw">
             <objects>
-                <viewController id="HMZ-JM-RsE" customClass="ImageView" customModule="Random_Photos_3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="HMZ-JM-RsE" customClass="ImageView" customModule="Random_Photos_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="36G-9H-bvR">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ls0-oo-0xq">
-                                <rect key="frame" x="0.0" y="705" width="409" height="44"/>
+                                <rect key="frame" x="-1" y="774" width="409" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="5OS-RD-bvq">
@@ -101,17 +101,18 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vtE-Ol-6A5">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="705"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vtE-Ol-6A5" customClass="ZoomingUIImageView" customModule="Random_Photos_3" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="98" width="393" height="610"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Q5-xH-s38"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="e5i-19-nZ2"/>
                     <connections>
                         <outlet property="imageView" destination="vtE-Ol-6A5" id="5ox-3B-Vb8"/>
+                        <segue destination="8s1-tO-Bqa" kind="showDetail" identifier="returnToGallery" id="UFJ-DN-E4R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l46-j0-Cun" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

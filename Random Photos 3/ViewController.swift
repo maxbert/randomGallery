@@ -61,7 +61,7 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         // Determine the size of the thumbnails to request from the PHCachingImageManager.
         let scale = UIScreen.main.scale
         let cellSize = gridView.contentSize
-        thumbnailSize = CGSize(width: cellSize.width, height: cellSize.height)
+        thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
         navigationItem.rightBarButtonItem = nil
     }
     
@@ -153,16 +153,34 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GridViewCell", for: indexPath) as? GridViewCell
             else { fatalError("Unexpected cell in collection view") }
         
+       
+        
         // Request an image for the asset from the PHCachingImageManager.
         cell.representedAssetIdentifier = asset.localIdentifier
-        imageManager.requestImage(for: asset, targetSize: thumbnailSize , contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
+        let _: UIImage? = fetchAndSetUIImageInCell(asset: asset, retryAttempts: 10, cell: cell, imageManager: imageManager)
+        return cell
+    }
+    
+    private func fetchAndSetUIImageInCell(asset: PHAsset, retryAttempts: Int = 10, cell: GridViewCell!, imageManager: PHCachingImageManager!) -> UIImage? {
+        var img: UIImage?
+        let options = PHImageRequestOptions()
+        
+        options.resizeMode = PHImageRequestOptionsResizeMode.fast;
+        options.isSynchronous = true
+        options.isNetworkAccessAllowed = true
+        options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
+        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: options, resultHandler: { image, _ in
+            img = image
             // UIKit may have recycled this cell by the handler's activation time.
             // Set the cell's thumbnail image only if it's still showing the same asset.
-            if true {
-                cell.thumbnailImage = image
+            if cell.representedAssetIdentifier == asset.localIdentifier && img != nil {
+                cell.thumbnailImage = img
             }
         })
-        return cell
+        if img == nil && retryAttempts > 0 {
+            return fetchAndSetUIImageInCell(asset: asset, retryAttempts: retryAttempts - 1, cell: cell, imageManager: imageManager)
+        }
+        return img
     }
     
     // MARK: UIScrollView

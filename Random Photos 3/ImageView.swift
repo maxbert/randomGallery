@@ -26,7 +26,47 @@ class ImageView: UIViewController, PHPhotoLibraryChangeObserver {
         super.viewDidLoad()
         PHPhotoLibrary.shared().register(self)
         updateStaticImage()
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeDown.direction = UISwipeGestureRecognizer.Direction.down
+       self.view.addGestureRecognizer(swipeDown)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
     }
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.right:
+                if (index > 0) {
+                    index -= 1
+                    asset = fetchResult.object(at: indexList[index])
+                    updateStaticImage()
+                    imageView.resetZoom()
+                }
+            case UISwipeGestureRecognizer.Direction.down:
+                returnToGallery(self)
+                imageView.resetZoom()
+            case UISwipeGestureRecognizer.Direction.left:
+                if (index < indexList.count - 1) {
+                    index += 1
+                    asset = fetchResult.object(at: indexList[index])
+                    updateStaticImage()
+                    imageView.resetZoom()
+                }
+            case UISwipeGestureRecognizer.Direction.up:
+                print("Swiped up")
+            default:
+                break
+            }
+        }
+    }
+
     
     var targetSize: CGSize {
         let scale = UIScreen.main.scale
@@ -57,7 +97,11 @@ class ImageView: UIViewController, PHPhotoLibraryChangeObserver {
             
             // present the view controller
             self.present(activityViewController, animated: true, completion: nil)
-        }
+    }
+    
+    @IBAction func returnToGallery(_ sender: Any) {
+        performSegue(withIdentifier: "returnToGallery", sender: sender)
+    }
     
     
     func getImageFromAsset(asset: PHAsset) -> UIImage! {
