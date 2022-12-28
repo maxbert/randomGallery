@@ -14,9 +14,6 @@ class ImageView: UIViewController, PHPhotoLibraryChangeObserver {
     }
     
     var asset: PHAsset!
-    var indexList: [Int]!
-    var prevContentOffset: CGFloat!
-    var fetchResult: PHFetchResult<PHAsset>!
     var index: Int!
     
     
@@ -26,45 +23,6 @@ class ImageView: UIViewController, PHPhotoLibraryChangeObserver {
         super.viewDidLoad()
         PHPhotoLibrary.shared().register(self)
         updateStaticImage()
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        self.view.addGestureRecognizer(swipeRight)
-
-        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeDown.direction = UISwipeGestureRecognizer.Direction.down
-       self.view.addGestureRecognizer(swipeDown)
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-        self.view.addGestureRecognizer(swipeLeft)
-    }
-    
-    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizer.Direction.right:
-                if (index > 0) {
-                    index -= 1
-                    asset = fetchResult.object(at: indexList[index])
-                    updateStaticImage()
-                    imageView.resetZoom()
-                }
-            case UISwipeGestureRecognizer.Direction.down:
-                returnToGallery(self)
-                imageView.resetZoom()
-            case UISwipeGestureRecognizer.Direction.left:
-                if (index < indexList.count - 1) {
-                    index += 1
-                    asset = fetchResult.object(at: indexList[index])
-                    updateStaticImage()
-                    imageView.resetZoom()
-                }
-            case UISwipeGestureRecognizer.Direction.up:
-                print("Swiped up")
-            default:
-                break
-            }
-        }
     }
 
     
@@ -99,10 +57,6 @@ class ImageView: UIViewController, PHPhotoLibraryChangeObserver {
             self.present(activityViewController, animated: true, completion: nil)
     }
     
-    @IBAction func returnToGallery(_ sender: Any) {
-        performSegue(withIdentifier: "returnToGallery", sender: sender)
-    }
-    
     
     func getImageFromAsset(asset: PHAsset) -> UIImage! {
         let manager = PHImageManager.default()
@@ -116,11 +70,12 @@ class ImageView: UIViewController, PHPhotoLibraryChangeObserver {
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? GridViewController else { fatalError("Unexpected view controller for segue") }
-        destination.indexList = indexList
-        destination.presetScrollLocation = prevContentOffset
-        destination.fetchResult = fetchResult
-    }
+    static func getInstance(asset: PHAsset!, index: Int!) -> ImageView {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "imageViewPage")as! ImageView
+        vc.asset = asset
+        vc.index = index
+        return vc
+      }
+
 }
 

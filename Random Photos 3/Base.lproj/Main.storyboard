@@ -14,7 +14,7 @@
             <objects>
                 <collectionViewController title="Gallery View" modalPresentationStyle="currentContext" clearsSelectionOnViewWillAppear="NO" id="8s1-tO-Bqa" customClass="GridViewController" customModule="Random_Photos_3" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" semanticContentAttribute="forceLeftToRight" contentInsetAdjustmentBehavior="never" dataMode="prototypes" id="u1b-n6-b7r">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="0.5"/>
@@ -43,7 +43,7 @@
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="imaView" destination="ACA-h6-2Z2" id="1Oq-5i-ZJ3"/>
-                                    <segue destination="HMZ-JM-RsE" kind="showDetail" id="NkW-4z-bu3"/>
+                                    <segue destination="Vgn-Vh-Bgg" kind="showDetail" id="LuD-co-ZBy"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wlN-Eq-HeU">
@@ -82,16 +82,20 @@
             </objects>
             <point key="canvasLocation" x="-396.18320610687022" y="-68.309859154929583"/>
         </scene>
-        <!--Image View-->
+        <!--imageViewPage-->
         <scene sceneID="EKp-H8-knw">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="HMZ-JM-RsE" customClass="ImageView" customModule="Random_Photos_3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imageViewPage" title="imageViewPage" modalPresentationStyle="fullScreen" id="HMZ-JM-RsE" customClass="ImageView" customModule="Random_Photos_3" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="36G-9H-bvR">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ls0-oo-0xq">
-                                <rect key="frame" x="-1" y="774" width="409" height="44"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6AO-05-O7E">
+                                <rect key="frame" x="-1" y="79" width="394" height="695"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ls0-oo-0xq">
+                                <rect key="frame" x="-5" y="774" width="402" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="5OS-RD-bvq">
@@ -101,23 +105,79 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vtE-Ol-6A5" customClass="ZoomingUIImageView" customModule="Random_Photos_3" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="98" width="393" height="610"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Q5-xH-s38"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="e5i-19-nZ2"/>
                     <connections>
-                        <outlet property="imageView" destination="vtE-Ol-6A5" id="5ox-3B-Vb8"/>
-                        <segue destination="8s1-tO-Bqa" kind="showDetail" identifier="returnToGallery" id="UFJ-DN-E4R"/>
+                        <outlet property="imageView" destination="6AO-05-O7E" id="edt-qp-2Ta"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l46-j0-Cun" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1049.6183206106871" y="-169.01408450704227"/>
+            <point key="canvasLocation" x="391.60305343511448" y="-832.3943661971831"/>
+        </scene>
+        <!--Page View-->
+        <scene sceneID="JdV-lp-t6L">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="fullScreen" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Vgn-Vh-Bgg" customClass="PageView" customModule="Random_Photos_3" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="8s1-tO-Bqa" kind="showDetail" identifier="returnToGallery" id="a3d-Nb-7BO"/>
+                    </connections>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kKA-cc-11x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2282" y="-180"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ts0-Qa-0nA">
+            <objects>
+                <viewController id="9ib-iQ-kmF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KiZ-F8-6Og">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z7f-CV-LK1">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="755"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="Yll-R6-E8e" kind="embed" id="Nxt-vs-TWg"/>
+                                </connections>
+                            </containerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="VwB-ay-wI1">
+                                <rect key="frame" x="0.0" y="755" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="eUd-Gl-Gge">
+                                        <connections>
+                                            <action selector="shareImageButton:" destination="HMZ-JM-RsE" id="iIn-ce-bd7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Bbh-Vn-U4S"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cXN-7T-cXJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3100" y="116.90140845070422"/>
+        </scene>
+        <!--Page View-->
+        <scene sceneID="zuh-fp-9oR">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="Yll-R6-E8e" customClass="PageView" customModule="Random_Photos_3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iVQ-lh-KrP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="755"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cYv-AF-lOu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4007" y="117"/>
         </scene>
     </scenes>
     <resources>

@@ -157,11 +157,11 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         
         // Request an image for the asset from the PHCachingImageManager.
         cell.representedAssetIdentifier = asset.localIdentifier
-        let _: UIImage? = fetchAndSetUIImageInCell(asset: asset, retryAttempts: 10, cell: cell, imageManager: imageManager)
+        let _: UIImage? = fetchAndSetUIImageInCell(asset: asset, retryAttempts: 0, cell: cell, imageManager: imageManager)
         return cell
     }
     
-    private func fetchAndSetUIImageInCell(asset: PHAsset, retryAttempts: Int = 10, cell: GridViewCell!, imageManager: PHCachingImageManager!) -> UIImage? {
+    private func fetchAndSetUIImageInCell(asset: PHAsset, retryAttempts: Int = 0, cell: GridViewCell!, imageManager: PHCachingImageManager!) -> UIImage? {
         var img: UIImage?
         let options = PHImageRequestOptions()
         
@@ -169,7 +169,7 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         options.isSynchronous = true
         options.isNetworkAccessAllowed = true
         options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
-        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: options, resultHandler: { image, _ in
+        imageManager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFit, options: options, resultHandler: { image, _ in
             img = image
             // UIKit may have recycled this cell by the handler's activation time.
             // Set the cell's thumbnail image only if it's still showing the same asset.
@@ -190,7 +190,7 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? ImageView else { fatalError("Unexpected view controller for segue") }
+        guard let destination = segue.destination as? PageView else { fatalError("Unexpected view controller for segue") }
         guard let collectionViewCell = sender as? GridViewCell else { fatalError("Unexpected sender for segue") }
         let indexPath = collectionView.indexPath(for: collectionViewCell)!
         destination.asset = fetchResult.object(at: indexList[indexPath.item])
