@@ -68,11 +68,18 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         updateCachedAssets()
     }
     
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        let sectionHeader: SectionHeader = (collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeader)
+        return sectionHeader
+    }
+    
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
     
     func refreshIndexList() {
+        print("refreshing index list")
         let numItems = fetchResult.count
         indexList = Array(0..<numItems)
         indexList.shuffle()
@@ -164,7 +171,7 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         let options = PHImageRequestOptions()
         
         options.resizeMode = PHImageRequestOptionsResizeMode.fast;
-        options.isSynchronous = true
+        options.isSynchronous = false
         options.isNetworkAccessAllowed = true
         options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
         imageManager.requestImage(for: asset, targetSize: CGSize(width: 500, height: 500), contentMode: .aspectFit, options: options, resultHandler: { image, _ in
@@ -197,6 +204,12 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         destination.index = indexPath.item
     }
 
-
+    
+    @IBAction func reshuffle(_ sender: Any) {
+        print("reshuffling...")
+        refreshIndexList()
+        gridView.reloadData()
+    }
+    
 }
 
