@@ -46,30 +46,7 @@ class ImageView: UIViewController, PHPhotoLibraryChangeObserver {
                                                 self.imageView.image = image
         })
     }
-    
-    @IBAction func shareImageButton(_ sender: UIBarButtonItem) {
-            // set up activity view controller
-            let imageToShare = [ getImageFromAsset(asset: asset)! ]
-            let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-            
-            // present the view controller
-            self.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    
-    func getImageFromAsset(asset: PHAsset) -> UIImage! {
-        let manager = PHImageManager.default()
-        let option = PHImageRequestOptions()
-        var image = UIImage()
-        option.isSynchronous = true
-        manager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
-            image = result!
-        })
-        return image
-    }
-    
-    
+
     static func getInstance(asset: PHAsset!, index: Int!) -> ImageView {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "imageViewPage")as! ImageView
         vc.asset = asset

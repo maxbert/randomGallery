@@ -42,7 +42,6 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
     fileprivate var previousPreheatRect = CGRect.zero
     var assetCollection: PHAssetCollection!
     var availableWidth: CGFloat = 0
-    var presetScrollLocation: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +51,6 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
         if (fetchResult == nil || fetchResult.count == 0) {
             fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
         }
-        collectionView.contentOffset.y = presetScrollLocation
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,13 +188,12 @@ class GridViewController: UICollectionViewController, PHPhotoLibraryAvailability
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = segue.destination as? PageView else { fatalError("Unexpected view controller for segue") }
+        guard let destination = segue.destination as? PageViewControllerWrapperController else { fatalError("Unexpected view controller for segue") }
         guard let collectionViewCell = sender as? GridViewCell else { fatalError("Unexpected sender for segue") }
         let indexPath = collectionView.indexPath(for: collectionViewCell)!
         destination.asset = fetchResult.object(at: indexList[indexPath.item])
         destination.indexList = indexList
         destination.fetchResult = fetchResult
-        destination.prevContentOffset = collectionView.contentOffset.y
         destination.index = indexPath.item
     }
 

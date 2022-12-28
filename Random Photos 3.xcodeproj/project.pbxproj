@@ -12,6 +12,7 @@
 		7B37485F295A805500566929 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B9909E529515808007BA018 /* Assets.xcassets */; };
 		7B374861295B659A00566929 /* ZoomingUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B374860295B659A00566929 /* ZoomingUIImageView.swift */; };
 		7B374865295BAE4F00566929 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B374864295BAE4F00566929 /* PageView.swift */; };
+		7B374867295BC04C00566929 /* PageViewControllerWrapperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B374866295BC04C00566929 /* PageViewControllerWrapperController.swift */; };
 		7B9909DD29515806007BA018 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9909DC29515806007BA018 /* AppDelegate.swift */; };
 		7B9909DF29515806007BA018 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9909DE29515806007BA018 /* SceneDelegate.swift */; };
 		7B9909E129515806007BA018 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9909E029515806007BA018 /* ViewController.swift */; };
@@ -45,6 +46,7 @@
 		7B1071292952D05C0006DA19 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		7B374860295B659A00566929 /* ZoomingUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomingUIImageView.swift; sourceTree = "<group>"; };
 		7B374864295BAE4F00566929 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		7B374866295BC04C00566929 /* PageViewControllerWrapperController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewControllerWrapperController.swift; sourceTree = "<group>"; };
 		7B9909D929515806007BA018 /* Random Photos 3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Photos 3.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B9909DC29515806007BA018 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B9909DE29515806007BA018 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				7B9909E029515806007BA018 /* ViewController.swift */,
 				7B990A0E295165A4007BA018 /* GridViewCell.swift */,
 				7B374864295BAE4F00566929 /* PageView.swift */,
+				7B374866295BC04C00566929 /* PageViewControllerWrapperController.swift */,
 				7B9909E229515806007BA018 /* Main.storyboard */,
 				7B9909E529515808007BA018 /* Assets.xcassets */,
 				7B9909E729515808007BA018 /* LaunchScreen.storyboard */,
@@ -279,6 +282,7 @@
 				7B9909DD29515806007BA018 /* AppDelegate.swift in Sources */,
 				7B374865295BAE4F00566929 /* PageView.swift in Sources */,
 				7B990A0F295165A4007BA018 /* GridViewCell.swift in Sources */,
+				7B374867295BC04C00566929 /* PageViewControllerWrapperController.swift in Sources */,
 				7B374861295B659A00566929 /* ZoomingUIImageView.swift in Sources */,
 				7B9909DF29515806007BA018 /* SceneDelegate.swift in Sources */,
 			);
